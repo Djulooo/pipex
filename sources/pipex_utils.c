@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 12:37:37 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/24 14:42:56 by jlaisne          ###   ########.fr       */
+/*   Created: 2023/01/24 14:43:19 by jlaisne           #+#    #+#             */
+/*   Updated: 2023/01/24 18:08:20 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr_path(const char *haystack, const char *needle, size_t len)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -32,9 +32,53 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 				&& ((i + j) < len))
 				j++;
 			if (needle[j] == '\0')
-				return ((char *)&haystack[i]);
+				return ((char *)&haystack[i + j]);
 		}
 		i++;
 	}
 	return (NULL);
+}
+
+void	join_slash(char **env)
+{
+	int	i;
+	char	*temp;
+
+	i = 0;
+	while (env[i])
+	{
+		temp = ft_strdup(env[i]);
+		free(env[i]);
+		env[i] = ft_strjoin(temp, "/");
+		free(temp);
+		i++;
+	}
+}
+
+char	**get_command(char *arg)
+{
+	char	**cmd;
+
+	cmd = ft_split(arg, " ");
+	if (!cmd)
+		return (NULL);
+}
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+void	display_error(void)
+{
+	ft_putstr_fd("Error\n", 2);
+	exit (EXIT_FAILURE);
 }

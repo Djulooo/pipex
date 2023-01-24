@@ -5,7 +5,7 @@ NAME					=	pipex
 HEADER_DIR				=	sources/pipex.h
 
 DIR						=	sources/
-SRC						=	pipex.c
+SRC						=	pipex.c	pipex_utils.c	pipex_exec.c
 
 OBJS					= $(SRC:%.c=$(DIR)%.o)
 OBJS_BONUS				= $(SRC_BONUS:%.c=$(DIR_BONUS)%.o)

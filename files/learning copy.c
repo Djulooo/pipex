@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   learning.c                                         :+:      :+:    :+:   */
+/*   learning copy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 15:23:54 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/18 16:54:31 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/24 13:57:19 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 int	main(void)
 {
-	char	cmd[] = "/bin/ls";
+	char	cmd[] = "/usr/bin/env";
 
-	char	*argVec[] = {"ls", "-l", "-a", NULL};
+	char	*argVec[] = {"env", NULL};
 	char	*envVec[] = {NULL};
 	printf("Start of execve %s\n", cmd);
 	if (execve(cmd, argVec, envVec) == -1)
@@ -34,6 +34,17 @@ int	main(void)
 	printf("Something went wrong.");
 	return (0);
 }
+
+	// char	cmd[] = "/bin/ls";
+
+	// char	*argVec[] = {"ls", "-l", "-a", NULL};
+	// char	*envVec[] = {NULL};
+	// printf("Start of execve %s\n", cmd);
+	// if (execve(cmd, argVec, envVec) == -1)
+	// 	perror("Could not execute execve");
+	
+	// printf("Something went wrong.");
+	// return (0);
 // execve -> arg + variable environment
 // two way comm
 	// int	p1[2];
