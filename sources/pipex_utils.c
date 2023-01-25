@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:43:19 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/24 18:08:20 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/25 16:57:21 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ char	**get_command(char *arg)
 {
 	char	**cmd;
 
-	cmd = ft_split(arg, " ");
+	cmd = ft_split(arg, ' ');
 	if (!cmd)
-		return (NULL);
+		display_error("Error in malloc\n");
+	return (cmd);
 }
 
 void	free_tab(char **tab)
@@ -77,8 +78,8 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-void	display_error(void)
+void	display_error(char *msg)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(msg, 2);
 	exit (EXIT_FAILURE);
 }
