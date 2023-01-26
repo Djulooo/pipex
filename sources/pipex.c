@@ -6,80 +6,80 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:09:12 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/25 17:40:12 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/26 15:32:12 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**get_path(char *envp[])
+static void	init_struct(t_pipex *var, char **argv, char **envp)
 {
-	char	*path;
-	char	**tab;
-	int		i;
-
-	i = 0;
-	while (envp[i])
-	{
-		path = ft_strnstr(envp[i], "PATH=", ft_strlen(envp[i]));
-		if (path)
-		{
-			path = ft_strdup(ft_strnstr_path(envp[i], "PATH=", ft_strlen(envp[i])));
-			break ;
-		}
-		free(path);
-		i++;
-	}
-	tab = ft_split(path, ':');
-	free(path);
-	if (!tab)
+	var->arg = argv;
+	var->fd1 = open(argv[1], O_RDONLY, 0777);
+	if (var->fd1 == -1)
+		display_error("Error, infile doesn't exist\n");
+	var->fd2 = open(var->arg[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (var->fd2 == -1)
+		display_error("Error, outfile doesn't exist\n");
+	var->env_cmd = get_path(envp);
+	if (!var->env_cmd)
 		display_error("Error in malloc\n");
-	join_slash(tab);
-	return (tab);
+}
+
+void	child_process(t_pipex *var, int *file, char **envp, char **arg)
+{
+	char	**cmd;
+
+	close(var->fd2);
+	close(file[0]);
+	if (dup2(var->fd1, STDIN_FILENO) == -1)
+		display_error("Error in duplication of fd1 as Stdin\n");
+	if (dup2(file[1], STDOUT_FILENO) == -1)
+		display_error("Error in duplication of file[1] as Stdout\n");
+	cmd = get_command(arg[2]);
+	close(var->fd1);
+	close(file[1]);
+	exec_command(var->env_cmd, cmd, envp);
+	exit(0);
+}
+
+void	parent_process(t_pipex *var, int *file, char **envp, char **arg)
+{
+	char	**cmd;
+
+	wait(NULL);
+	close(file[1]);
+	close(var->fd1);
+	if (dup2(file[0], STDIN_FILENO) == -1)
+		display_error("Error in duplication of file[0] as Stdin\n");
+	if (dup2(var->fd2, STDOUT_FILENO) == -1)
+		display_error("Error in duplication of fd2 as Stdout\n");
+	close(file[0]);
+	close(var->fd2);
+	cmd = get_command(arg[3]);
+	exec_command(var->env_cmd, cmd, envp);
 }
 
 int	main(int argc, char **argv, char *envp[])
 {
 	int		file[2];
 	int		id;
-	char	**cmd;
-	char	**env_cmd;
-	int		fd1;
-	int		fd2;
-	int status;
-	
-	id = fork();
-	pipe(file);
+	t_pipex	var;
+
 	if (argc == 5)
 	{
-		fd1 = open(argv[1], O_RDONLY);
-		fd2 = open(argv[4], O_WRONLY);
-		env_cmd = get_path(envp);
+		init_struct(&var, argv, envp);
+		if (pipe(file) == -1)
+			display_error("Pipe returned an error\n");
+		id = fork();
+		if (id == -1)
+			display_error("Forking unsuccessful\n");
 		if (id == 0)
-		{
-			cmd = get_command(argv[2]);
-			close(file[0]);
-			dup2(fd1, STDIN_FILENO);
-			dup2(file[1], STDOUT_FILENO);
-			close(fd1);
-			exec_command(env_cmd, cmd, envp);
-			close(file[1]);
-			close(fd2);
-		}
+			child_process(&var, file, envp, argv);
 		else
-		{
-			waitpid(-1, &status, 0);
-			close(file[1]);
-			dup2(file[0], STDIN_FILENO);
-			dup2(fd2, STDOUT_FILENO);
-			close(fd2);
-			cmd = get_command(argv[3]);
-			exec_command(env_cmd, cmd, envp);
-			close(file[0]);
-			close(fd1);
-		}
+			parent_process(&var, file, envp, argv);
 	}
 	else
 		return (ft_putstr_fd("Wrong number of arguments!\n", 2), 3);
-	return (free_tab(env_cmd), 0);
+	return (free_tab(var.env_cmd), 0);
 }

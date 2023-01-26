@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:43:19 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/25 16:57:21 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/26 14:05:51 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,19 @@ char	*ft_strnstr_path(const char *haystack, const char *needle, size_t len)
 
 void	join_slash(char **env)
 {
-	int	i;
+	int		i;
 	char	*temp;
 
 	i = 0;
 	while (env[i])
 	{
 		temp = ft_strdup(env[i]);
+		if (!temp)
+			display_error("Error in  malloc\n");
 		free(env[i]);
 		env[i] = ft_strjoin(temp, "/");
+		if (!env[i])
+			display_error("Error in  malloc\n");
 		free(temp);
 		i++;
 	}
@@ -59,6 +63,7 @@ char	**get_command(char *arg)
 {
 	char	**cmd;
 
+	(void) arg;
 	cmd = ft_split(arg, ' ');
 	if (!cmd)
 		display_error("Error in malloc\n");
