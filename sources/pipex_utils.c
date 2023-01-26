@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 14:43:19 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/26 14:05:51 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/26 16:05:42 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	join_slash(char **env)
 	{
 		temp = ft_strdup(env[i]);
 		if (!temp)
-			display_error("Error in  malloc\n");
+			display_error("Error in  malloc");
 		free(env[i]);
 		env[i] = ft_strjoin(temp, "/");
 		if (!env[i])
-			display_error("Error in  malloc\n");
+			display_error("Error in  malloc");
 		free(temp);
 		i++;
 	}
@@ -66,7 +66,7 @@ char	**get_command(char *arg)
 	(void) arg;
 	cmd = ft_split(arg, ' ');
 	if (!cmd)
-		display_error("Error in malloc\n");
+		display_error("Error in malloc");
 	return (cmd);
 }
 
@@ -86,5 +86,6 @@ void	free_tab(char **tab)
 void	display_error(char *msg)
 {
 	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
 	exit (EXIT_FAILURE);
 }

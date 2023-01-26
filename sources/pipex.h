@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:07:35 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/26 15:00:50 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/26 16:23:06 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <stdio.h>
 
 typedef struct s_pipe
 {
