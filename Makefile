@@ -8,7 +8,6 @@ DIR						=	sources/
 SRC						=	pipex.c	pipex_utils.c	pipex_exec.c
 
 OBJS					= $(SRC:%.c=$(DIR)%.o)
-OBJS_BONUS				= $(SRC_BONUS:%.c=$(DIR_BONUS)%.o)
 
 LIBFT					= libft.a
 LIB_DIR					= libft/
@@ -19,7 +18,7 @@ CFLAGS					= -Wall -Wextra -Werror
 RM						= rm -rf
 
 %.o:					$(DIR)%.c $(HEADER_DIR)
-						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -I$(LIB_DIR) -I$(MINILIB_DIR) -I/usr/include -O3 -c $< -o $@
+						$(GCC) $(CFLAGS) -I$(HEADER_DIR) -I$(LIB_DIR) -c $< -o $@
 
 all:					lib $(HEADER_DIR) $(NAME)
 
@@ -28,7 +27,7 @@ $(NAME):				$(OBJS) $(LIB_DIR)$(LIBFT)
 
 lib:
 						@make -C $(LIB_DIR)
-						@make -C ft_printf/
+						@make -C $/ft_printf/
 
 clean:
 						@${RM} $(OBJS)

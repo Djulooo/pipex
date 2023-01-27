@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:44:27 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/07 11:45:53 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:39:54 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_convert_char(va_list args, int *count)
 
 	c = va_arg(args, int);
 	*count += 1;
-	ft_putchar_fd(c, 1);
+	ft_putchar_fd(c, 2);
 }
 
 void	ft_convert_str(va_list args, int *count)
@@ -52,7 +52,7 @@ void	ft_convert_str(va_list args, int *count)
 	{
 		len = ft_strlen(str);
 		*count += len;
-		ft_putstr_fd(str, 1);
+		ft_putstr_fd(str, 2);
 	}
 }
 
@@ -61,7 +61,7 @@ void	ft_convert_integer_dec(va_list args, int *count)
 	int	i;
 
 	i = va_arg(args, int);
-	ft_putnbr_fd(i, 1);
+	ft_putnbr_fd(i, 2);
 	if (i < 0)
 		*count += ft_numlen(i) + 1;
 	else
@@ -73,7 +73,7 @@ void	ft_convert_dec_int(va_list args, int *count)
 	int	i;
 
 	i = va_arg(args, int);
-	ft_putnbr_fd(i, 1);
+	ft_putnbr_fd(i, 2);
 	if (i < 0)
 		*count += ft_numlen(i) + 1;
 	else

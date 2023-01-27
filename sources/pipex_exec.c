@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:15:40 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/26 16:08:25 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:41:07 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,18 @@ void	exec_command(char **env, char **cmd, char *envp[])
 	while (env[i])
 	{
 		exe = ft_strjoin(env[i], cmd[0]);
+		if (!exe)
+			display_error("execution line not properly allocated");
 		if (access(exe, X_OK) == -1)
 		{
 			if (!env[i + 1])
-				display_error(ft_strjoin("command not found: ", cmd[0]));
+			{
+				ft_printf("Command not found: %s\n", cmd[0]);
+				exit(1);
+			}
 			i++;
 		}
 		else
-		{
 			execve(exe, cmd, envp);
-			free(exe);
-			i++;
-		}
 	}
 }

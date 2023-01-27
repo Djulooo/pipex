@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:07:35 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/26 16:23:06 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:38:31 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@
 # include <unistd.h>
 # include <stdio.h>
 
-typedef struct s_pipe
+typedef struct s_pipex
 {
 	char	**env_cmd;
 	char	**arg;
+	int		file[2];
 	int		fd1;
 	int		fd2;
+	int		status;
 }	t_pipex;
 
 char	*ft_strnstr_path(const char *haystack, const char *needle, size_t len);

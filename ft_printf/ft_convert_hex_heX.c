@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 18:00:02 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/07 11:45:49 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:39:36 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ static int	ft_putnbr_hex_fd(unsigned int n, char *base)
 	if (n < 0)
 	{
 		n *= -1;
-		ft_putchar_fd('-', 1);
+		ft_putchar_fd('-', 2);
 	}
 	while (n / div >= baselen)
 		div *= baselen;
 	while (div != 0)
 	{
 		value = (n / div) % baselen;
-		ft_putchar_fd(base[value], 1);
+		ft_putchar_fd(base[value], 2);
 		i++;
 		div = div / baselen;
 	}

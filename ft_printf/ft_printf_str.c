@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:08:21 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/07 11:45:47 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:39:29 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	ft_which_convers(char conv, va_list args, int *count)
 		ft_convert_hex_caps(args, count);
 	else
 	{
-		ft_putchar_fd(conv, 1);
+		ft_putchar_fd(conv, 2);
 		*count += 1;
 	}
 }
@@ -46,7 +46,7 @@ static void	write_nonflags(char *str, int *count, int *i)
 	}
 	else
 	{
-		ft_putchar_fd(str[(*i)], 1);
+		ft_putchar_fd(str[(*i)], 2);
 		(*i)++;
 	}
 }

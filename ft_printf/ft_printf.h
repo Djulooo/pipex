@@ -6,15 +6,15 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 11:28:39 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/18 17:12:36 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:39:01 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "../libft/libft.h"
 # include <stdarg.h>
+# include "../libft/libft.h"
 
 int		ft_printf(const char *str, ...);
 void	ft_convert_char(va_list args, int *count);

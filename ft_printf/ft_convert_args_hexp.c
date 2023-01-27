@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 17:52:04 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/07 11:45:58 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:40:26 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_putnbr_unsigned_hex_fd(unsigned long int n, char *base)
 	while (div != 0)
 	{
 		value = (n / div) % 16;
-		ft_putchar_fd(base[value], 1);
+		ft_putchar_fd(base[value], 2);
 		x++;
 		div = div / 16;
 	}
@@ -40,12 +40,12 @@ void	ft_convert_hex_pointer(va_list args, int *count)
 	temp = va_arg(args, long);
 	if (temp == 0)
 	{
-		ft_putstr_fd("0x0", 1);
+		ft_putstr_fd("0x0", 2);
 		*count += 3;
 	}
 	else
 	{
-		ft_putstr_fd("0x", 1);
+		ft_putstr_fd("0x", 2);
 		*count += ft_putnbr_unsigned_hex_fd(temp, "0123456789abcdef") + 2;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:12:47 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/07 11:45:56 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/27 13:41:30 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	ft_putnbr_unsigned_fd(unsigned int n, int fd)
 {
 	int	div;
 
+	fd = 2;
 	div = 1;
 	while (n / div >= 10)
 		div *= 10;
@@ -46,6 +47,6 @@ void	ft_convert_uns_int(va_list args, int *count)
 	unsigned int	i;
 
 	i = va_arg(args, unsigned int);
-	ft_putnbr_unsigned_fd(i, 1);
+	ft_putnbr_unsigned_fd(i, 2);
 	*count += ft_numlen(i);
 }
