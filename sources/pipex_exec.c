@@ -6,7 +6,7 @@
 /*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:15:40 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/27 13:41:07 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/30 15:56:32 by jlaisne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,29 @@ char	**get_path(char *envp[])
 	return (tab);
 }
 
+static void	check_cmd(char **cmd, char **envp)
+{
+	if (access(cmd[0], X_OK) != -1)
+		execve(cmd[0], cmd, envp);
+	if (cmd[0] == '\0')
+	{
+		ft_printf("zsh: permission denied: %s\n", cmd[0]);
+		exit(1);
+	}	
+	if (cmd[0][0] == '.' && cmd[0][1] == '/' && access(cmd[0], X_OK) == -1)
+	{
+		ft_printf("No such file or directory: %s\n", cmd[0]);
+		exit(1);
+	}	
+}
+
 void	exec_command(char **env, char **cmd, char *envp[])
 {
 	int		i;
 	char	*exe;
 
 	i = 0;
+	check_cmd(cmd, envp);
 	while (env[i])
 	{
 		exe = ft_strjoin(env[i], cmd[0]);
