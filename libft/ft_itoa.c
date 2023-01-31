@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:53:29 by jlaisne           #+#    #+#             */
-/*   Updated: 2022/11/15 10:00:58 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/31 11:18:17 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 static int	ft_numlen(int n)
 {
 	int	i;
-	int	div;
 
 	i = 1;
-	div = 1;
 	if (n < 0)
 		n *= -1;
 	while (n / 10 != 0)

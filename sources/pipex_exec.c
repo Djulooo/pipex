@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 17:15:40 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/30 15:56:32 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/31 11:18:58 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	check_cmd(char **cmd, char **envp)
 {
 	if (access(cmd[0], X_OK) != -1)
 		execve(cmd[0], cmd, envp);
-	if (cmd[0] == '\0')
+	if (!cmd[0])
 	{
 		ft_printf("zsh: permission denied: %s\n", cmd[0]);
 		exit(1);

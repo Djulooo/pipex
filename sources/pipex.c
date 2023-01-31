@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jlaisne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: juleslaisne <juleslaisne@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:09:12 by jlaisne           #+#    #+#             */
-/*   Updated: 2023/01/30 16:27:16 by jlaisne          ###   ########.fr       */
+/*   Updated: 2023/01/31 11:18:01 by juleslaisne      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
 static void	init_struct(t_pipex *var, char **argv, char **envp)
 {	
